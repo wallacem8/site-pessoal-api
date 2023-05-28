@@ -28,6 +28,11 @@ app.use('/api/auth', authRoute);
 
 initDatabase();
 
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Algo deu errado!');
+});
+
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
