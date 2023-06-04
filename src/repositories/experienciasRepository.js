@@ -1,8 +1,13 @@
 const { pool } = require('../config/db');
 
-exports.getAllExperiencias = async () => {
-    const result = await pool.query('SELECT * FROM experiencias');
+exports.getAllExperiencias = async (tipo) => {
+    let query = ('SELECT * FROM experiencias');
+    if (tipo) {
+        query += `WHERE tipo="${tipo}"`;
+    }
+    const result = await pool.query(query);
     return result.rows;
+
 }
 
 exports.getExperienciaById = async (id) => {
